@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JukeBox</title>
+    <script src="load_data_from_db.php"></script>
+    <script src="load_playlist_from_db.php"></script>
+    <script src="/path/to/flickity.pkgd.min.js"></script>
+        <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/d3js/6.3.1/d3.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Rancho&display=swap" rel="stylesheet"> 
+    <script src="https://kit.fontawesome.com/42aa80ac17.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/path/to/flickity.css" media="screen"> 
+<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+        <nav class="navbar">
+            <label id="nav_icons" class="logo"><i class="fas fa-headphones-alt"></i>JUKEBOX</label>    
+            <input style="color: white;" class="searchbox" type="text" name="search" placeholder="Search for music you love!">
+                <button class="searchbutton" type="submit" class="search_button"><i class="fa fa-search" aria-hidden="true"></i></button>
+                <ul id='menulist'>
+                <li><i id="nav_icons" class="fas fa-user-circle accounticon" aria-hidden="true" style="position: absolute; left: 87%; top:3.5%;" onclick="openmenu()"></i></li>
+                <li ><i id="nav_icons" class="fa fa-whatsapp" aria-hidden="true"></i></li>
+                <li><i id="nav_icons" class="fa fa-instagram" aria-hidden="true"></i></li>
+                <li><i id="nav_icons" class="fa fa-twitter-square" aria-hidden="true"></i></li>
+                <li><i id="nav_icons" class="fa fa-facebook-square" aria-hidden="true"></i></li>
+                <li><i id="nav_icons" class="fa fa-snapchat-square" aria-hidden="true"></i></li>
+            </ul>
+        </nav>
+        <div id='menubar'> 
+            <ul>
+                <li class='listitems' style="display: inline;"><i class="fas fa-user-circle"><span id='loggedinas' style="font-size: medium;">Logged in as</span></i></li>
+                <li class='listitems' onclick='changepassword()'><i class="fas fa-key"><span>Change Password</span></i></li>
+                <li class='listitems' onclick='forgotpassword()'><i class="fas fa-unlock"><span>Forgot Password?</span></i></li>
+                <li class='listitems' onclick='deleteaccount()'><i class="fas fa-trash-alt"></span>Delete Account</span></i></li>
+                <li class='listitems' onclick='logout()'><i class="fas fa-sign-out-alt"></span>Log Out</span></i></li>  
+            </ul>
+        </div>
+        <div class="carousel" data-flickity='{"wrapAround":true,"autoPlay":2200}'>
+            <div class="carousel-cell">
+                <img class="carouselimg"src="images/chandigarhmain.jpg" alt="">
+            </div>
+            <div class="carousel-cell">
+                <img class="carouselimg" src="images/burjkhalifa.jpg" alt="">
+            </div>
+            <div class="carousel-cell">
+                <img class="carouselimg" src="images/garmi.jpg" alt="">
+            </div>
+            <div class="carousel-cell">
+                <img class="carouselimg" src="images/gendaphool.jpg" alt="">
+            </div>
+            <div class="carousel-cell">
+                <img class="carouselimg" src="images/teraghata.jpg" alt="">
+            </div>
+        </div>
+        <p class="p1">Best of 2020</p>
+        <div class="tiles">
+            <img class="tilesimg" src="images/best2020_1.png" alt="" onclick="openNav();setplaylist(1)">
+            <img class="tilesimg" src="images/best2020_2.png" alt="" onclick="openNav();setplaylist(2)">
+            <img class="tilesimg" src="images/best2020_3.png" alt="" onclick="openNav();setplaylist(3)">
+            <img class="tilesimg" src="images/best2020_4.png" alt="" onclick="openNav();setplaylist(4)">
+            <img class="tilesimg" src="images/best2020_5.png" alt="" onclick="openNav();setplaylist(5)">
+            <img class="tilesimg" src="images/best2020_6.png" alt="" onclick="openNav();setplaylist(6)">
+            <img class="tilesimg" src="images/best2020_1.png" alt="">
+            <img class="tilesimg" src="images/best2020_2.png" alt="">
+            <img class="tilesimg" src="images/best2020_3.png" alt="">
+            <img class="tilesimg" src="images/best2020_4.png" alt="">
+            <img class="tilesimg" src="images/best2020_5.png" alt="">
+            <img class="tilesimg" src="images/best2020_6.png" alt="">
+        </div>
+        <p class="p1">Trending Now</p>
+        <div class="tiles">
+        <div class="cont">
+        <img class="tilesimg" src="images/trendy_scam.png" alt="" onclick="setTrack(5)">
+        <i id="imgicnplaynext" class="fas fa-chevron-circle-right" onclick="playnext(5)"></i>
+        <i id="imgicnplay" class="fas fa-play"></i>
+        <i id="imgicnaddtoqueue" class="fas fa-plus-circle" onclick="addtoqueuenext(5)"></i>
+        </div>
+        <div class="cont">
+        <img class="tilesimg" src="images/trendy_box.png" alt="">
+        <i id="imgicnplaynext" class="fas fa-chevron-circle-right"></i>
+        <i id="imgicnplay" class="fas fa-play"></i>
+        <i id="imgicnaddtoqueue" class="fas fa-plus-circle"></i>
+        </div>
+        <div class="cont">
+        <img class="tilesimg" src="images_files/6.jpg" alt="" onclick="setTrack(6)">
+        <i id="imgicnplaynext" class="fas fa-chevron-circle-right" onclick="playnext(6)"></i>
+        <i id="imgicnplay" class="fas fa-play"></i>
+        <i id="imgicnaddtoqueue" class="fas fa-plus-circle" onclick="addtoqueuenext(6)"></i>
+        </div>
+        <div class="cont">
+        <img class="tilesimg" src="images/biba.png" alt="" style="border-radius: 10%;" onclick="setTrack(7)">
+        <i id="imgicnplaynext" class="fas fa-chevron-circle-right" onclick="playnext(7)"></i>
+        <i id="imgicnplay" class="fas fa-play"></i>
+        <i id="imgicnaddtoqueue" class="fas fa-plus-circle" onclick="addtoqueuenext(7)"></i>
+        </div>
+        <div class="cont">
+        <img class="tilesimg" src="images/trendy_monster.png" alt="">
+        <i id="imgicnplaynext" class="fas fa-chevron-circle-right"></i>
+        <i id="imgicnplay" class="fas fa-play"></i>
+        <i id="imgicnaddtoqueue" class="fas fa-plus-circle"></i>
+        </div>
+        <div class="cont">
+        <img class="tilesimg" src="images/tredny_positions.png" alt="">
+        <i id="imgicnplaynext" class="fas fa-chevron-circle-right"></i>
+        <i id="imgicnplay" class="fas fa-play"></i>
+        <i id="imgicnaddtoqueue" class="fas fa-plus-circle"></i>
+        </div>
+        <div class="cont">
+        <img class="tilesimg" src="images/trendy_scam.png" alt="">
+        <i id="imgicnplaynext" class="fas fa-chevron-circle-right"></i>
+        <i id="imgicnplay" class="fas fa-play"></i>
+        <i id="imgicnaddtoqueue" class="fas fa-plus-circle"></i>
+        </div>
+        <div class="cont">
+        <img class="tilesimg" src="images/trendy_box.png" alt="">
+        <i id="imgicnplaynext" class="fas fa-chevron-circle-right"></i>
+        <i id="imgicnplay" class="fas fa-play"></i>
+        <i id="imgicnaddtoqueue" class="fas fa-plus-circle"></i>
+        </div>
+        <div class="cont">
+        <img class="tilesimg" src="images/trendy_dedarde.png" alt="">
+        <i id="imgicnplaynext" class="fas fa-chevron-circle-right"></i>
+        <i id="imgicnplay" class="fas fa-play"></i>
+        <i id="imgicnaddtoqueue" class="fas fa-plus-circle"></i>
+        </div>
+        <div class="cont">
+        <img class="tilesimg" src="images/trendy_lechhallang.png" alt="">
+        <i id="imgicnplaynext" class="fas fa-chevron-circle-right"></i>
+        <i id="imgicnplay" class="fas fa-play"></i>
+        <i id="imgicnaddtoqueue" class="fas fa-plus-circle"></i>
+        </div>
+        <div class="cont">
+        <img class="tilesimg" src="images/trendy_monster.png" alt="">
+        <i id="imgicnplaynext" class="fas fa-chevron-circle-right"></i>
+        <i id="imgicnplay" class="fas fa-play"></i>
+        <i id="imgicnaddtoqueue" class="fas fa-plus-circle"></i>
+        </div>
+        </div>
+        <p class="p1">International Top Hits</p>
+        <div class="tiles">
+        <div class="cont">
+        <img class="tilesimg" src="images/letmeloveu.png" alt="" onclick="setTrack(2)">
+        <i id="imgicnplaynext" class="fas fa-chevron-circle-right" onclick="playnext(2)"></i>
+        <i id="imgicnplay" class="fas fa-play"></i>
+        <i id="imgicnaddtoqueue" class="fas fa-plus-circle" onclick="addtoqueuenext(2)"></i>
+        </div>
+        <div class="cont">
+        <img class="tilesimg" src="images/yummy.png" alt="">
+        <i id="imgicnplaynext" class="fas fa-chevron-circle-right"></i>
+        <i id="imgicnplay" class="fas fa-play"></i>
+        <i id="imgicnaddtoqueue" class="fas fa-plus-circle"></i>
+        </div>
+        <div class="cont">
+        <img class="tilesimg" src="images/believer.png" alt="">
+        <i id="imgicnplaynext" class="fas fa-chevron-circle-right"></i>
+        <i id="imgicnplay" class="fas fa-play"></i>
+        <i id="imgicnaddtoqueue" class="fas fa-plus-circle"></i>
+        </div>
+        <div class="cont">
+        <img class="tilesimg" src="images/badyboy.png" alt="">
+        <i id="imgicnplaynext" class="fas fa-chevron-circle-right"></i>
+        <i id="imgicnplay" class="fas fa-play"></i>
+        <i id="imgicnaddtoqueue" class="fas fa-plus-circle"></i>
+        </div>
+        <div class="cont">
+        <img class="tilesimg" src="images/intentions.png" alt="">
+        <i id="imgicnplaynext" class="fas fa-chevron-circle-right"></i>
+        <i id="imgicnplay" class="fas fa-play"></i>
+        <i id="imgicnaddtoqueue" class="fas fa-plus-circle"></i>
+        </div>
+        <div class="cont">
+        <img class="tilesimg" src="images/willow.png" alt="">
+        <i id="imgicnplaynext" class="fas fa-chevron-circle-right"></i>
+        <i id="imgicnplay" class="fas fa-play"></i>
+        <i id="imgicnaddtoqueue" class="fas fa-plus-circle"></i>
+        </div>
+        <div class="cont">
+        <img class="tilesimg" src="images/willow.png" alt="">
+        <i id="imgicnplaynext" class="fas fa-chevron-circle-right"></i>
+        <i id="imgicnplay" class="fas fa-play"></i>
+        <i id="imgicnaddtoqueue" class="fas fa-plus-circle"></i>
+        </div>
+        <div class="cont">
+        <img class="tilesimg" src="images/yummy.png" alt="">
+        <i id="imgicnplaynext" class="fas fa-chevron-circle-right"></i>
+        <i id="imgicnplay" class="fas fa-play"></i>
+        <i id="imgicnaddtoqueue" class="fas fa-plus-circle"></i>
+        </div>
+        <div class="cont">
+        <img class="tilesimg" src="images/believer.png" alt="">
+        <i id="imgicnplaynext" class="fas fa-chevron-circle-right"></i>
+        <i id="imgicnplay" class="fas fa-play"></i>
+        <i id="imgicnaddtoqueue" class="fas fa-plus-circle"></i>
+        </div>
+        <div class="cont">
+        <img class="tilesimg" src="images/badyboy.png" alt="">
+        <i id="imgicnplaynext" class="fas fa-chevron-circle-right"></i>
+        <i id="imgicnplay" class="fas fa-play"></i>
+        <i id="imgicnaddtoqueue" class="fas fa-plus-circle"></i>
+        </div>
+        </div>
+        <p class="p1">Editor's Pick</p>
+        <div class="tiles">
+        <div class="cont">
+        <img class="tilesimg" src="images/terrimitti.png" onclick="setTrack(4)" alt="">
+        <i id="imgicnplaynext" class="fas fa-chevron-circle-right" onclick="playnext(4)"></i>
+        <i id="imgicnplay" class="fas fa-play"></i>
+        <i id="imgicnaddtoqueue" class="fas fa-plus-circle" onclick="addtoqueuenext(4)"></i>
+        </div>
+        <div class="cont">
+        <img class="tilesimg" src="images/terayaarhoon.png" alt="">
+        <i id="imgicnplaynext" class="fas fa-chevron-circle-right"></i>
+        <i id="imgicnplay" class="fas fa-play"></i>
+        <i id="imgicnaddtoqueue" class="fas fa-plus-circle"></i>
+        </div>
+        <div class="cont">
+        <img class="tilesimg" src="images/shapeofu.png" onclick="setTrack(1)" alt="">
+        <i id="imgicnplaynext" class="fas fa-chevron-circle-right" onclick="playnext(1)"></i>
+        <i id="imgicnplay" class="fas fa-play"></i>
+        <i id="imgicnaddtoqueue" class="fas fa-plus-circle" onclick="addtoqueuenext(1)"></i>
+        </div>
+        <div class="cont">
+        <img class="tilesimg" src="images/kabirsingh.png" onclick="setTrack(3)" alt="">
+        <i id="imgicnplaynext" class="fas fa-chevron-circle-right" onclick="playnext(3)"></i>
+        <i id="imgicnplay" class="fas fa-play"></i>
+        <i id="imgicnaddtoqueue" class="fas fa-plus-circle" onclick="addtoqueuenext(3)"></i>
+        </div>
+        <div class="cont">
+        <img class="tilesimg" src="images/aabadbarbad.png" alt="" style="border-radius: 10%;" onclick="setTrack(8)">
+        <i id="imgicnplaynext" class="fas fa-chevron-circle-right" onclick="playnext(8)"></i>
+        <i id="imgicnplay" class="fas fa-play"></i>
+        <i id="imgicnaddtoqueue" class="fas fa-plus-circle" onclick="addtoqueuenext(8)"></i>
+        </div>
+        <div class="cont">
+        <img class="tilesimg" src="images/khairiyat.png" alt="">
+        <i id="imgicnplaynext" class="fas fa-chevron-circle-right"></i>
+        <i id="imgicnplay" class="fas fa-play"></i>
+        <i id="imgicnaddtoqueue" class="fas fa-plus-circle"></i>
+        </div>
+        <div class="cont">
+        <img class="tilesimg" src="images/terrimitti.png" alt="">
+        <i id="imgicnplaynext" class="fas fa-chevron-circle-right"></i>
+        <i id="imgicnplay" class="fas fa-play"></i>
+        <i id="imgicnaddtoqueue" class="fas fa-plus-circle"></i>
+        </div>
+        <div class="cont">
+        <img class="tilesimg" src="images/terayaarhoon.png" alt="">
+        <i id="imgicnplaynext" class="fas fa-chevron-circle-right"></i>
+        <i id="imgicnplay" class="fas fa-play"></i>
+        <i id="imgicnaddtoqueue" class="fas fa-plus-circle"></i>
+        </div>
+        <div class="cont">
+        <img class="tilesimg" src="images/shapeofu.png" alt="">
+        <i id="imgicnplaynext" class="fas fa-chevron-circle-right"></i>
+        <i id="imgicnplay" class="fas fa-play"></i>
+        <i id="imgicnaddtoqueue" class="fas fa-plus-circle"></i>
+        </div>
+        <div class="cont">
+        <img class="tilesimg" src="images/kabirsingh.png" alt="">
+        <i id="imgicnplaynext" class="fas fa-chevron-circle-right"></i>
+        <i id="imgicnplay" class="fas fa-play"></i>
+        <i id="imgicnaddtoqueue" class="fas fa-plus-circle"></i>
+        </div>
+        </div>
+        <p class="p1">Evergreen Kannada Hits</p>
+        <div class="tiles">
+            <img class="tilesimg" src="images/terrimitti.png" alt="">
+            <img class="tilesimg" src="images/terayaarhoon.png" alt="">
+            <img class="tilesimg" src="images/shapeofu.png" alt="">
+            <img class="tilesimg" src="images/kabirsingh.png" alt="">
+            <img class="tilesimg" src="images/memories.png" alt="">
+            <img class="tilesimg" src="images/khairiyat.png" alt="">
+            <img class="tilesimg" src="images/terrimitti.png" alt="">
+            <img class="tilesimg" src="images/terayaarhoon.png" alt="">
+            <img class="tilesimg" src="images/shapeofu.png" alt="">
+            <img class="tilesimg" src="images/kabirsingh.png" alt="">
+            <img class="tilesimg" src="images/memories.png" alt="">
+            <img class="tilesimg" src="images/khairiyat.png" alt="">
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="controller">
+            <img class="currsongimg"src="images/Shape_Of_You.png" alt="">
+            <span class="currsongname">Shape Of You</span>
+                <i id="back" class="fas fa-backward" ></i>
+                <i id="play" class="fas fa-caret-square-right" ></i>
+                <i id="forw"  class="fas fa-forward" onclick=""></i>
+                <input id="slider"  type="range" min="0" max="100" value="0" onchange="seekTo()">
+                <span class="timeremaining">0.00</span>
+                <i id="sound" class="fas fa-volume-up"></i>
+                <input id="songslider"  type="range" min="0" max="100" value="100" step="10">
+                <i id="replay" class="fas fa-redo"></i>
+                <i id="shuffle"  class="fas fa-random" ></i>
+                <i id="like"  class="fas fa-thumbs-up" ></i>
+                <i id="dislike"  class="fas fa-thumbs-down"></i>
+            </div>
+
+            <div id="upnext">
+            <span id="upnextheading" style="color: white; position:absolute; top:.1em; right:.2em;">Up Next</span>
+            <img id="upnextimg" src="images/terrimitti.png" alt="">
+            <span id="upnexttxt" style="color: white; position:absolute; top:1.7em; left:4.5em;">Teri Mitti</span>
+            </div>
+
+            <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()" style="color: white;">&times;</a>
+            <img class="navbar_headimg" src="images/best2020_1.png" alt="">
+            <p class="navbar_headname"></p>
+            <ul id="playlist">
+
+
+            </ul>
+            </div>
+
+            <script src="script.js"></script>
+</body>
+</html>

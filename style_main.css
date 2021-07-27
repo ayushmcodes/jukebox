@@ -1,0 +1,366 @@
+body{
+    overflow-x: hidden;
+    background:	#0C0F12;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+*{
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+nav{
+    background-color: #21252D;
+    height: 80px;
+    width: 100%;
+}
+label.logo{
+    float: left;
+    font-size: 50px;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    padding:0 100px;
+    line-height: 80px;
+}
+nav ul{
+    float: right;
+    margin-right: 20px;
+}
+nav ul li{
+    display: inline;
+    line-height: 80px;
+    font-size: 150%;
+}
+.searchbox{
+    background-color: #0C0F12;
+    border: #0C0F12;
+    position: relative;
+    top: 25px;
+    right: 5em;
+    width: 30%;
+    height: 38%;
+    border-top-left-radius: .5em;
+    border-bottom-left-radius: .5em;
+}
+.searchbutton{
+    background-color: #0C0F12;
+    color:grey;
+    border: #0C0F12;
+    position: relative;
+    top: 1.88em;
+    right: 5.2em;
+    width: 2%;
+    height: 38%;
+    border-top-right-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+}
+#nav_icons{
+    color: white;
+}
+::placeholder
+{
+    color: white;
+}
+.carousel{
+    margin-top: 20px;
+}
+.carousel-cell{
+    cursor: default;
+    width: 45%;
+    height: 20em;
+}
+.carousel-cell::before{
+    display: block;
+    text-align: center;
+    font-size: 80px;
+}
+.carouselimg{
+    width: 90%;
+    height: 320px;
+    border-radius: 1.5em;
+}
+.p1{
+    position: relative;
+    left:3.5em;
+    top: 4em;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    color: white;
+    font-size: 2em;
+}
+.tiles{
+    width: 85%;
+    display: flex;
+    margin-right: 15em;
+    margin-left: 5.7em;
+    margin-top: 8.5em;
+    padding-top: .7em;
+    padding-bottom: .7em;
+    padding-left: 1em;
+    perspective: 50em;
+    scrollbar-width: none;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.tiles::-webkit-scrollbar{
+    display: none;
+}
+.cont{
+    position: relative;
+}
+.tilesimg{
+    height: 11em;
+    margin-right: 1em;
+    transition: all;
+    transition-duration: .4s;
+    display: block;
+}
+#imgicnplay{
+    position: absolute;
+    bottom: .2em;
+    right: 6.1em;
+    color: white;
+    opacity: 0;
+    transition: all;
+    transition-duration: .7s;
+}
+#imgicnplaynext{
+    position: absolute;
+    bottom: .2em;
+    right: 7.1em;
+    color: white;
+    opacity: 0;
+    transition: all;
+    transition-duration: .7s;
+    
+}
+#imgicnaddtoqueue{
+    position: absolute;
+    bottom: .2em;
+    right: 5em;
+    color: white;
+    opacity: 0;
+    transition: all;
+    transition-duration: .7s;
+    
+}
+.cont:hover #imgicnplay{
+    opacity: 1;
+}
+.cont:hover #imgicnplaynext{
+    opacity: 1;
+}
+.cont:hover #imgicnaddtoqueue{
+    opacity: 1;
+}
+.controller{
+    border-radius: .8em;
+    position:fixed;
+    left: 11em;
+    bottom: .5em;
+    background-color: #20242C;
+    height: 4em;
+    width: 65%;
+}
+#upnext{
+    border-radius: .8em;
+    position: fixed;
+    bottom: .5em;
+    height: 4em;
+    width: 10%;
+    left: 73em;
+    background-color: #20242C;
+}
+.currsongimg{
+    height: 4em;
+    width: 4em;
+    border-radius: 100%;
+}
+.currsongname{
+    position: relative;
+    bottom: 1.5em;
+    color: white;
+}
+#back{
+    position: relative;
+    left: 1.5em;
+    bottom: 1.5em;
+    color: white;
+}
+#play{
+    position: relative;
+    left: 1.6em;
+    bottom: 1.5em;
+    color: white;
+}
+#forw{
+    position: relative;
+    left: 1.7em;
+    bottom: 1.5em;
+    color: white;
+}
+#slider{
+    background-color: grey;
+    position: relative;
+    left: 2.2em;
+    bottom: 1.5em;
+    -webkit-appearance: none;
+    width: 50%;
+    border-radius: .3em;
+}
+#slider::-webkit-slider-thumb {
+    -webkit-appearance: none; 
+    appearance: none;
+    border: none;
+    background-color: black;
+    border-radius: 100%;
+}
+#slider::-moz-range-thumb {
+    -webkit-appearance: none; 
+    appearance: none;
+    background-color: black;
+    border-radius: 100%;
+    border: none;
+}
+#shuffle{
+    color: white;
+    position: absolute;
+    bottom: 1.25em;
+    right: 5em;
+}
+#like{
+    color: white;
+    position: absolute;
+    bottom: 1.25em;
+    right: 2.5em;
+}
+#dislike{
+    color: white;
+    position: absolute;
+    bottom: 1.25em;
+    right: 1.2em;
+}
+#replay{
+    color: white;
+    position: absolute;
+    bottom: 1.2em;
+    right:3.8em;
+}
+#songslider{
+    -webkit-appearance: none;
+    width: 5%;
+    border-radius: .3em;
+    position: absolute;
+    bottom: 1.4em;
+    right: 7.5em;
+    background-color: grey;
+}
+#sound{
+    color: white;
+    position: absolute;
+    right: 9.5em;
+    bottom: 1.25em;
+}
+#songslider::-moz-range-thumb {
+    -webkit-appearance: none; 
+    appearance: none;
+    background-color: black;
+    border-radius: 100%;
+    border: none;
+    cursor: pointer;
+}
+.timeremaining{
+    color: whitesmoke;
+    position: relative;
+    bottom: 1.5em;
+    left: 1.8em;
+    font-size: medium;
+}    
+#love{
+    color: pink;
+    position: relative;
+    bottom: .4em;
+    left: 3.83em;
+}
+.sidenav {
+  height: 50%;
+  width: 0;
+  position: fixed;
+  z-index: 1; 
+  bottom: .2em;
+  right: 0;
+  background-color: #20242C;
+  overflow-x: hidden;
+  padding-top: 60px;
+  transition: 0.5s; 
+  border-top-left-radius: 5%;
+  border-bottom-left-radius: 5%;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+  color: white;
+}
+.navbar_headimg
+{
+    height: 27%;
+    width: 27%;
+    position: absolute;
+    left: .5em;
+    top: 1em;
+    border-radius: 15%;
+}
+.navbar_headname
+{
+    color: white;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    position: absolute;
+    right: 3em;
+    font-size:x-large;
+    top: 2em;
+}
+#upnextimg{
+    position: absolute;
+    left: .2em;
+    bottom: 0.1em;
+    height: 3.8em;
+    width: 4em;
+    border-radius: 25%;
+}
+#upnext{
+    transition: all;
+    transition-duration: .1s;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+#upnext::-webkit-scrollbar{
+    display: none;
+}
+#menubar{
+    background-color: white;
+    position: absolute;
+    top: 8%;
+    right: 12%;
+    height: 22%;
+    width: 10%;
+    z-index: 1;
+    border-radius: 5%;
+    opacity: 0;
+}
+#menulist{
+    display: flexbox;
+    flex-direction: row;
+    align-items: bas;
+}
+.listitems{
+    margin-top: 10%;
+    font-size: 85%;
+    color: black;
+    cursor: pointer;
+}

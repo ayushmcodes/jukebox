@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/path/to/flickity.pkgd.min.js"></script>
+        <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/d3js/6.3.1/d3.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Rancho&display=swap" rel="stylesheet"> 
+    <script src="https://kit.fontawesome.com/42aa80ac17.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/path/to/flickity.css" media="screen"> 
+<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+<script src="https://smtpjs.com/v3/smtp.js"></script>
+<style>
+    body{
+    overflow-x: hidden;
+    background:	#494E55;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+*{
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+#cont1{
+    background-color:  black;
+    width: 30%;
+    height: 70%;
+    position: fixed;
+    left: 20%;
+    top: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+#cont1 *{
+    color: white;
+    font-size: xx-large;
+}
+#cont2{
+    background-color:white;
+    width: 30%;
+    height: 70%;
+    position: fixed;
+    right: 20%;
+    top: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+#websitelogo{
+    margin-top: 5%;
+}
+#websitename{
+    font-size: 300%;
+}
+#character
+{
+    padding-left: 15%;
+    height: 70%;
+}
+#login,#signup{
+    color: #494E55;
+    background: none;
+    color: inhert;
+    border: none;
+    padding: 0;
+    font-size: large;
+}
+#buttons{
+    width: 25%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+#form{
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    width: 40%;
+    justify-content: flex-start;
+    padding-bottom: 50%;
+    padding-bottom: 0%;
+    align-items: center;
+}
+#eye{
+    position: absolute;
+    right:28%;
+    top:32%;
+}
+</style>
+</head>
+<body>
+    <div id="cont1">
+        <i id="websitelogo" class="fas fa-headphones-alt"></i>
+        <h1 id="websitename">JUKEBOX</h1>
+        <img id="character" src="images/character.jpg" alt="">
+    </div>
+    <div id="cont2">
+        <i id="websitelogo" class="fas fa-headphones-alt" style="font-size:xx-large; color: #494E55;"></i>
+        <div id="buttons">
+            <button id="login" onclick="login()">Login</button>
+            <button id="signup" onclick="signup()">Sign Up</button>
+        </div >
+        <div id="form">
+        </div>
+        <i id="eye" class="fas fa-eye"></i>
+    </div>
+    <script>
+        var otp=-1;
+        var login_signup=1;
+        var sendotp=0;
+        document.getElementById('login').style.textDecoration='underline';
+        $('#login').css('text-decoration-thickness','15%');
+        var user=document.createElement('i');
+        var pass=document.createElement('i');
+        pass.id='pass';
+        var email=document.createElement('i');
+        var otpicn=document.createElement('i');
+
+        user.innerHTML='<i class="fas fa-user"></i>';
+        email.innerHTML='<i class="fas fa-envelope"></i>';
+        pass.innerHTML='<i id="passwordicn" class="fas fa-lock"></i>';
+        otpicn.innerHTML='<i class="fas fa-list-ol"></i>';
+
+        user.style.marginTop='10%';
+        pass.style.marginTop='10%';
+        email.style.marginTop='10%';
+        otpicn.style.marginTop='10%';
+
+        var username=document.createElement('INPUT');
+        username.name='username';
+        username.id='username';
+        var password=document.createElement('INPUT');
+        password.name='password';
+        password.id='password';
+        var emailid=document.createElement('INPUT');
+        emailid.name='emailid';
+        emailid.id='emailid';
+        var otpinput=document.createElement('INPUT');
+        password.setAttribute('type','password');
+        otpinput.name='otpinput';
+        otpinput.id='otpinput';
+
+
+        var loginbtn=document.createElement('BUTTON');
+        loginbtn.id="loginbtn";
+
+        
+        username.style.border='none';
+        username.style.width='90%';
+        username.style.height='130%';
+        username.style.outline='none';
+        username.placeholder='Username';
+        username.style.backgroundColor='#EAECEE';
+        username.style.transition='all';
+        username.style.transitionDuration='.1s';
+        username.addEventListener('focus',function(){
+            username.style.borderBottom='solid #494E55';
+        });
+        username.addEventListener('blur',function(){
+            username.style.border='none';
+        });
+
+        password.style.border='none';
+        password.style.width='90%';
+        password.style.height='130%';
+        password.style.outline='none';
+        password.placeholder='Password';
+        password.style.backgroundColor='#EAECEE';
+        password.style.transition='all';
+        password.style.transitionDuration='.1s';
+        password.addEventListener('focus',function(){
+            password.style.borderBottom='solid #494E55';
+        });
+        password.addEventListener('blur',function(){
+            password.style.border='none';
+        });
+        password.id='password';
+
+        emailid.style.border='none';
+        emailid.style.width='89%';
+        emailid.style.height='130%';
+        emailid.style.outline='none';
+        emailid.placeholder='Email';
+        emailid.style.backgroundColor='#EAECEE';
+        emailid.style.transition='all';
+        emailid.style.transitionDuration='.1s';
+        emailid.addEventListener('focus',function(){
+            emailid.style.borderBottom='solid #494E55';
+        });
+        emailid.addEventListener('blur',function(){
+            emailid.style.border='none';
+        });
+
+
+        otpinput.style.border='none';
+        otpinput.style.width='89%';
+        otpinput.style.height='130%';
+        otpinput.style.outline='none';
+        otpinput.placeholder='Enter OTP';
+        otpinput.style.backgroundColor='#EAECEE';
+        otpinput.style.transition='all';
+        otpinput.style.transitionDuration='.1s';
+        otpinput.addEventListener('focus',function(){
+            otpinput.style.borderBottom='solid #494E55';
+        });
+        otpinput.addEventListener('blur',function(){
+            otpinput.style.border='none';
+        });
+
+
+        loginbtn.style.height='3em';
+        loginbtn.style.width='10em';
+        loginbtn.style.border='none';
+        loginbtn.style.backgroundColor='#494E55';
+        loginbtn.style.marginTop='1.5em';
+        loginbtn.innerText='Login';
+        loginbtn.style.color='white';
+        loginbtn.style.position='absolute';
+        loginbtn.style.bottom='53%';
+        loginbtn.addEventListener('onclick',logsign);
+
+        user.appendChild(username);
+        pass.appendChild(password);
+        email.appendChild(emailid);
+        otpicn.appendChild(otpinput);
+
+
+        document.getElementById('form').appendChild(user);
+        document.getElementById('form').appendChild(pass);
+        document.getElementById('form').appendChild(loginbtn);
+
+        function login()
+        {
+        login_signup=1;    
+        document.getElementById('signup').style.textDecoration='none'
+
+
+        document.getElementById('login').style.textDecoration='underline';
+        $('#login').css('text-decoration-thickness','15%');
+
+        document.getElementById('form').removeChild(email);
+        document.getElementById('form').removeChild(otpicn);
+        loginbtn.innerText='Login';
+
+        loginbtn.style.bottom='53%';
+
+        eye.style.right='28%'
+        eye.style.top='32%';
+
+        }
+
+        function signup()
+        {
+        login_signup=0;
+        document.getElementById('login').style.textDecoration='none'
+
+        document.getElementById('signup').style.textDecoration='underline';
+        $('#signup').css('text-decoration-thickness','15%');
+
+        document.getElementById('form').removeChild(pass);
+        document.getElementById('form').removeChild(loginbtn);
+        document.getElementById('form').appendChild(email);
+        document.getElementById('form').appendChild(pass);
+        document.getElementById('form').appendChild(otpicn);
+        if(sendotp==0)
+        {
+            loginbtn.innerText='Send OTP';      
+        }
+        else
+        {
+            loginbtn.innerText='Sign Up';
+        }
+        document.getElementById('form').appendChild(loginbtn);
+
+        loginbtn.style.bottom='38%';
+
+
+        eye.style.right='28%'
+        eye.style.top='39%';
+
+
+        }
+        
+        var f=1;
+        $('#eye').click(function(){
+            if(f)
+            {
+            $('#eye').removeClass('fas fa-eye');
+            $('#eye').addClass('fas fa-eye-slash');
+            f=0;
+            password.setAttribute('type','text');
+            }
+            else
+            {
+            $('#eye').removeClass('fas fa-eye-slash');
+            $('#eye').addClass('fas fa-eye');
+            f=1;
+            password.setAttribute('type','password');
+            }
+        });
+
+
+        function generateotpandsend()
+        {
+            var email_id=document.getElementById('emailid').value;
+            otp=Math.floor((Math.random() * 9000)) +1000;
+            Email.send({
+                Host:'smtp.gmail.com',
+                Username:'jukeboxteam6@gmail.com',
+                Password:'VwRnfN2HTChs8by',
+                To:email_id,
+                From:'jukeboxteam6@gmail.com',
+                Subject:'Welcome to JUKEBOX',
+                Body:'Hi, Please use the OTP to below register your account<br>'+otp+'<br>Please dont share your OTP with anyone.<br>If this wasn’t you, contact our support team at jukeboxteam6@gmail.com',
+            }).then(function(message){
+                alert("OTP sent successfully")
+            });
+        }
+
+        function logsign()
+        {
+            if(login_signup)
+            {
+                var user_name=document.getElementById('username').value;
+                var pass_word=document.getElementById('password').value;
+                $.post('loginpage.php',{username_:user_name,password_:pass_word},function(data){
+                    if(data==0)
+                    {
+                        localStorage.setItem('key',user_name);
+                        window.location.href='Untitled-2.html';
+                    }
+                    else
+                    window.location.href='loginpage.html';
+                });
+            }
+            else
+            {
+                if(sendotp==0)
+                {
+                    generateotpandsend();
+                    sendotp=1;
+                    loginbtn.innerText='Sign Up';
+                }
+                else
+                {
+                var otp_entered_by_user=document.getElementById('otpinput').value;
+                console.log(otp_entered_by_user);
+                console.log(otp);
+                if(otp==otp_entered_by_user)
+                {
+                console.log('correct');
+                var user_name=document.getElementById('username').value;
+                var pass_word=document.getElementById('password').value;
+                var email_id=document.getElementById('emailid').value;
+                $.post('loginpage.php',{username_:user_name,emailid_:email_id,password_:pass_word},function(data){
+                    if(data==1)
+                    {
+                    alert('Account Created');
+                    setTimeout(function(){window.location.href='loginpage.html';},1000);
+                    }
+                });
+                }
+                else
+                {
+                    console.log('wrong');
+                    alert('OTP entered is wrong');
+                }
+            }
+            }
+        }
+
+        document.getElementById('loginbtn').addEventListener('click',logsign)
+    </script>
+</body>
+</html>
